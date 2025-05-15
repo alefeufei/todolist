@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas Elaborada</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Minha Lista de Tarefas</h1>
+        <div class="input-area">
+            <input type="text" id="taskInput" placeholder="Adicionar nova tarefa...">
+            <input type="date" id="taskDueDateInput">
+            <button id="addTaskBtn">Adicionar</button>
+        </div>
+        <ul id="taskList">
+            <!-- As tarefas aparecerão aqui -->
+        </ul>
+        <div class="filters">
+            <button id="filterAll">Todas</button>
+            <button id="filterActive">Ativas</button>
+            <button id="filterCompleted">Concluídas</button>
+            <button id="filterOverdue">Atrasadas</button>
+        </div>
+        <button id="clearCompletedBtn">Limpar Concluídas</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

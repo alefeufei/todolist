@@ -1,0 +1,143 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.input-area {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#taskInput {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    font-size: 16px;
+}
+
+#taskInput:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+#addTaskBtn {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#addTaskBtn:hover {
+    background-color: #0056b3;
+}
+
+#taskList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#taskList li {
+    background-color: #f9f9f9;
+    padding: 12px;
+    border: 1px solid #eee;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+#taskList li.completed {
+    text-decoration: line-through;
+    color: #aaa;
+    background-color: #e9e9e9;
+}
+
+#taskList li .task-text {
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+#taskList li .actions button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+#taskList li .actions .delete-btn {
+    color: #dc3545;
+}
+
+#taskList li .actions .delete-btn:hover {
+    color: #c82333;
+}
+
+.filters {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.filters button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border: 1px solid #007bff;
+    background-color: #fff;
+    color: #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filters button.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.filters button:hover {
+    background-color: #e6f2ff;
+}
+
+#clearCompletedBtn {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 15px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#clearCompletedBtn:hover {
+    background-color: #c82333;
+}
