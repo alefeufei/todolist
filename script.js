@@ -12,9 +12,26 @@ document.addEventListener('DOMContentLoaded', () => {
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     let currentFilter = 'all';
 
-    const saveTasks = () => {
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-    };
+    // Supondo que você tenha um arquivo script.js ou similar
+    
+    // Chave para o localStorage
+    const TASKS_STORAGE_KEY = 'todoListTasks';
+    
+    // Função para carregar tarefas do localStorage
+    function loadTasks() {
+        const tasksJSON = localStorage.getItem(TASKS_STORAGE_KEY);
+        try {
+            return tasksJSON ? JSON.parse(tasksJSON) : [];
+        } catch (e) {
+            console.error("Erro ao carregar tarefas do localStorage:", e);
+            return []; // Retorna um array vazio em caso de erro de parse
+        }
+    }
+    
+    // Função para salvar tarefas no localStorage
+    function saveTasks(tasks) {
+        localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+    }
 
     const formatDate = (dateString) => {
         if (!dateString) return '';
@@ -180,4 +197,97 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Renderizar tarefas ao carregar a página
     renderTasks();
+});
+
+let tasks = loadTasks(); // Carrega tarefas ao iniciar
+
+// Função para renderizar tarefas na tela (você provavelmente já tem algo assim)
+function renderTasks() {
+    const taskListElement = document.getElementById('taskList');
+    taskListElement.innerHTML = ''; // Limpa a lista atual
+
+    tasks.forEach(task => {
+        const listItem = document.createElement('li');
+        listItem.textContent = task.text; // Simplificado, ajuste conforme sua estrutura
+        if (task.date) {
+            listItem.textContent += ` (Data: ${task.date})`;
+        }
+        if (task.completed) {
+            listItem.classList.add('completed');
+        }
+
+        // Adicionar botões de completar/deletar, etc.
+        // ...
+
+        // Exemplo de como marcar como completa (simplificado)
+        listItem.addEventListener('click', () => {
+            toggleTaskCompletion(task.id);
+        });
+        
+        // Exemplo de botão de deletar (simplificado)
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'X';
+        deleteButton.onclick = () => deleteTask(task.id);
+        listItem.appendChild(deleteButton);
+
+
+        taskListElement.appendChild(listItem);
+    });
+}
+
+
+// Exemplo de como sua função de adicionar tarefa pode ser modificada
+function addTask(taskText, taskDate) {
+    if (!taskText.trim()) return; // Não adiciona tarefas vazias
+
+    const newTask = {
+        id: Date.now(),
+        text: taskText,
+        date: taskDate, // Adiciona a data se fornecida
+        completed: false
+    };
+
+    tasks.push(newTask);
+    saveTasks(tasks); // Salva o array atualizado
+    renderTasks(); // Re-renderiza a lista
+}
+
+// Exemplo de como sua função de deletar tarefa pode ser modificada
+function deleteTask(taskId) {
+    tasks = tasks.filter(task => task.id !== taskId);
+    saveTasks(tasks); // Salva o array atualizado
+    renderTasks(); // Re-renderiza a lista
+}
+
+// Exemplo de como sua função de marcar como concluída pode ser modificada
+function toggleTaskCompletion(taskId) {
+    const task = tasks.find(task => task.id === taskId);
+    if (task) {
+        task.completed = !task.completed;
+        saveTasks(tasks); // Salva o array atualizado
+        renderTasks(); // Re-renderiza a lista
+    }
+}
+
+// Event listener para o formulário de adicionar tarefa
+// (Você precisará adaptar isso à sua estrutura HTML)
+document.addEventListener('DOMContentLoaded', () => {
+    renderTasks(); // Renderiza as tarefas carregadas ao iniciar a página
+
+    const addTaskBtn = document.getElementById('addTaskBtn');
+    const taskInput = document.getElementById('taskInput');
+    const taskDateInput = document.getElementById('taskDate'); // Supondo que você tenha este ID
+
+    if (addTaskBtn) {
+        addTaskBtn.addEventListener('click', () => {
+            const text = taskInput.value;
+            const date = taskDateInput ? taskDateInput.value : null; // Pega a data se o campo existir
+            addTask(text, date);
+            taskInput.value = ''; // Limpa o campo de texto
+            if (taskDateInput) taskDateInput.value = ''; // Limpa o campo de data
+        });
+    }
+    
+    // Adicionar outros event listeners, como para filtros, limpar completas, etc.
+    // E certificar-se de que eles também chamem saveTasks() quando necessário.
 });
