@@ -1,6 +1,5 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
     display: flex;
@@ -8,7 +7,14 @@ body {
     align-items: center;
     min-height: 100vh;
     color: #333;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 1s ease-in-out;
+    /* A cor de fundo e a imagem de fundo serão definidas pelo JavaScript */
 }
+
+/* Removidas as seções @media incorretas para tempo */
 
 .container {
     background-color: #fff;
@@ -28,17 +34,34 @@ h1 {
 .input-area {
     display: flex;
     margin-bottom: 20px;
+    gap: 10px; /* Adicionado espaço entre o campo de entrada e o botão de adicion;
 }
 
 #taskInput {
     flex-grow: 1;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px 0 0 5px;
+    border-radius: 5px; /* Modificado de 5px 0 0 5px */
     font-size: 16px;
 }
 
 #taskInput:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+/* Novo estilo para o campo de data */
+#taskDate {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-left: 10px; /* Espaço antes do campo de data */
+    /* Se o campo de data não precisar se expandir, flex-grow: 0 é o padrão.
+       Se precisar de uma largura específica, você pode adicionar: width: [valor]; */
+}
+
+#taskDate:focus {
     outline: none;
     border-color: #007bff;
 }
@@ -48,9 +71,10 @@ h1 {
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 0 5px 5px 0;
+    border-radius: 5px; /* Modificado de 0 5px 5px 0 */
     cursor: pointer;
     font-size: 16px;
+    margin-left: 10px; /* Adicionado espaço antes do botão */
 }
 
 #addTaskBtn:hover {
